@@ -4,6 +4,8 @@ from chunker import chunk_doc
 from indexer import load_existing_chunks, load_state, persist, persist_state
 from models import IngestionState
 
+PIPELINE_VERSION = "2"
+
 def main():
     raw = load_markdown_docs("sample_docs")
     previous_state = load_state()
@@ -20,11 +22,16 @@ def main():
                 path=raw_doc.path,
                 title=raw_doc.title,
                 content_hash=raw_doc.content_hash,
+                pipeline_version=PIPELINE_VERSION,
             )
         )
 
         previous = previous_state.get(states[-1].doc_id)
-        if previous and previous["content_hash"] == raw_doc.content_hash:
+        if (
+            previous
+            and previous["content_hash"] == raw_doc.content_hash
+            and previous.get("pipeline_version") == PIPELINE_VERSION
+        ):
             chunks.extend(previous_chunks.get(states[-1].doc_id, []))
             continue
 

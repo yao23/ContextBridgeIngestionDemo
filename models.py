@@ -13,6 +13,8 @@ class Section:
     heading: str
     text: str
     code_blocks: List[str] = field(default_factory=list)
+    method: str = ""
+    endpoint: str = ""
 
 @dataclass
 class NormalizedDoc:
@@ -28,6 +30,8 @@ class Chunk:
     path: str
     title: str
     section: str
+    method: str
+    endpoint: str
     content: str
     tags: List[str]
 
@@ -37,3 +41,4 @@ class IngestionState:
     path: str
     title: str
     content_hash: str
+    pipeline_version: str

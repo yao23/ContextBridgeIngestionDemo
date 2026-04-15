@@ -7,6 +7,7 @@ This project is a lightweight data-ingestion demo for API documentation. It read
 - Structure-aware ingestion instead of raw text scraping
 - Metadata attached to chunks for downstream coding-agent retrieval
 - Incremental ingestion using content hashes
+- Lightweight endpoint extraction for API sections
 - A simple keyword search CLI over the generated chunks
 
 ## Project layout
@@ -33,6 +34,7 @@ python search.py "create token"
 - `output/normalized.json`: normalized document structure
 - `output/chunks.json`: searchable chunk records
 - `output/state.json`: ingestion state used for incremental runs
+- Endpoint and HTTP method metadata are included when the parser can detect them
 
 ## Incremental behavior
 
@@ -42,4 +44,4 @@ Each markdown file gets a SHA-256 content hash. On re-run, unchanged docs reuse 
 
 - Preserving section boundaries and examples improves retrieval quality for coding agents.
 - Stable document identities and content hashes let the pipeline avoid full rebuilds.
-- The next natural extension is schema extraction for endpoints, params, auth rules, and examples.
+- The next natural extension is richer schema extraction for params, auth rules, and examples.

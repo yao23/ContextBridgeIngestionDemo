@@ -4,18 +4,9 @@
     "doc_id": "auth",
     "path": "sample_docs/auth.md",
     "title": "Auth API",
-    "section": "Introduction",
-    "content": "# Auth API",
-    "tags": [
-      "auth"
-    ]
-  },
-  {
-    "chunk_id": "auth:1",
-    "doc_id": "auth",
-    "path": "sample_docs/auth.md",
-    "title": "Auth API",
     "section": "Create Token",
+    "method": "POST",
+    "endpoint": "/v1/token",
     "content": "POST /v1/token\n\ncurl -X POST /v1/token",
     "tags": [
       "token",
@@ -27,18 +18,9 @@
     "doc_id": "users",
     "path": "sample_docs/users.md",
     "title": "Users API",
-    "section": "Introduction",
-    "content": "# Users API",
-    "tags": [
-      "user"
-    ]
-  },
-  {
-    "chunk_id": "users:1",
-    "doc_id": "users",
-    "path": "sample_docs/users.md",
-    "title": "Users API",
     "section": "Get User",
+    "method": "GET",
+    "endpoint": "/v1/users/{id}",
     "content": "GET /v1/users/{id}\n\ncurl /v1/users/123",
     "tags": [
       "user",

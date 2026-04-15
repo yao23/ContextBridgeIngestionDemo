@@ -1,8 +1,9 @@
 from models import NormalizedDoc, Chunk
 
-def infer_tags(text: str):
+def infer_tags(text: str, method: str = "", endpoint: str = ""):
     keywords = ["auth","token","user","payment","post","get"]
-    return [k for k in keywords if k in text.lower()]
+    searchable = " ".join([text, method, endpoint]).lower()
+    return [k for k in keywords if k in searchable]
 
 def chunk_doc(doc: NormalizedDoc):
     chunks = []
@@ -14,7 +15,9 @@ def chunk_doc(doc: NormalizedDoc):
             doc.path,
             doc.title,
             sec.heading,
+            sec.method,
+            sec.endpoint,
             content.strip(),
-            infer_tags(content)
+            infer_tags(content, sec.method, sec.endpoint)
         ))
     return chunks

@@ -12,6 +12,8 @@ def score(q, record):
         [
             record["title"],
             record["section"],
+            record.get("method", ""),
+            record.get("endpoint", ""),
             record["content"],
             " ".join(record["tags"]),
         ]
@@ -39,6 +41,8 @@ def main():
 
     for r in ranked[:5]:
         print(f"[score={r['score']}] {r['title']} > {r['section']}")
+        if r.get("method") and r.get("endpoint"):
+            print(f"endpoint={r['method']} {r['endpoint']}")
         print(f"tags={', '.join(r['tags']) if r['tags'] else 'none'}")
         print(r["content"][:200])
         print("---")
