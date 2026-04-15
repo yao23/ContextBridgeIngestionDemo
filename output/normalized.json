@@ -1,24 +1,5 @@
 [
   {
-    "doc_id": "users",
-    "path": "sample_docs/users.md",
-    "title": "Users API",
-    "sections": [
-      {
-        "heading": "Introduction",
-        "text": "# Users API",
-        "code_blocks": []
-      },
-      {
-        "heading": "Get User",
-        "text": "GET /v1/users/{id}",
-        "code_blocks": [
-          "curl /v1/users/123"
-        ]
-      }
-    ]
-  },
-  {
     "doc_id": "auth",
     "path": "sample_docs/auth.md",
     "title": "Auth API",
@@ -33,6 +14,25 @@
         "text": "POST /v1/token",
         "code_blocks": [
           "curl -X POST /v1/token"
+        ]
+      }
+    ]
+  },
+  {
+    "doc_id": "users",
+    "path": "sample_docs/users.md",
+    "title": "Users API",
+    "sections": [
+      {
+        "heading": "Introduction",
+        "text": "# Users API",
+        "code_blocks": []
+      },
+      {
+        "heading": "Get User",
+        "text": "GET /v1/users/{id}",
+        "code_blocks": [
+          "curl /v1/users/123"
         ]
       }
     ]

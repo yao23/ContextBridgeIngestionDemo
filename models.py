@@ -30,3 +30,10 @@ class Chunk:
     section: str
     content: str
     tags: List[str]
+
+@dataclass
+class IngestionState:
+    doc_id: str
+    path: str
+    title: str
+    content_hash: str

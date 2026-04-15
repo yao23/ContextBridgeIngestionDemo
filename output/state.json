@@ -1,14 +1,14 @@
 [
   {
+    "doc_id": "auth",
     "path": "sample_docs/auth.md",
     "title": "Auth API",
-    "raw_text": "# Auth API\n\n## Create Token\nPOST /v1/token\n\n```\ncurl -X POST /v1/token\n```\n",
     "content_hash": "62b24018b5d2fb35716b214b83f4e449eee337ce5abf92cddc3190edd60c1cb7"
   },
   {
+    "doc_id": "users",
     "path": "sample_docs/users.md",
     "title": "Users API",
-    "raw_text": "# Users API\n\n## Get User\nGET /v1/users/{id}\n\n```\ncurl /v1/users/123\n```\n",
     "content_hash": "ed53e71873000a773e8c4dd0f85fee7f63f886619e711b19015dacfb129423c0"
   }
 ]
