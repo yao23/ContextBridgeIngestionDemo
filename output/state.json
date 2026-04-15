@@ -4,13 +4,13 @@
     "path": "sample_docs/auth.md",
     "title": "Auth API",
     "content_hash": "266519a82826ffcf0e45e9ec886b36caa0cb213285e664c25f4ad1acc5f9bc48",
-    "pipeline_version": "manual"
+    "pipeline_version": "5"
   },
   {
     "doc_id": "users",
     "path": "sample_docs/users.md",
     "title": "Users API",
     "content_hash": "46ab065c71e1294f335c62105b8e030dfdc28726c74aabbe37468636c8c986c2",
-    "pipeline_version": "manual"
+    "pipeline_version": "5"
   }
 ]
