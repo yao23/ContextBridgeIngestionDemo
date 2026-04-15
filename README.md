@@ -21,6 +21,7 @@ This project is a lightweight data-ingestion demo for API documentation. It read
 - `indexer.py`: persists outputs and ingestion state
 - `search.py`: searches chunked output by keyword overlap
 - `schema_summary.py`: prints a compact API-schema view from normalized docs
+- `evaluate_extraction.py`: validates extracted schema against expected sample outputs
 - `demo.sh`: runs the end-to-end interview demo flow
 - `sample_docs/`: example API docs to ingest
 - `output/`: generated artifacts
@@ -31,6 +32,7 @@ This project is a lightweight data-ingestion demo for API documentation. It read
 python3 main.py
 python3 search.py "create token"
 python3 schema_summary.py
+python3 evaluate_extraction.py
 bash demo.sh
 ```
 
@@ -60,7 +62,8 @@ Each markdown file gets a SHA-256 content hash. On re-run, unchanged docs reuse 
 2. Call out that the pipeline preserves semantic structure instead of flattening docs into raw text.
 3. Point at `schema_summary.py` output to show extracted method, endpoint, params, auth, response fields, and status codes.
 4. Use `search.py "create token"` or `search.py "user profile 404"` to show that retrieval benefits from structured metadata, not just keyword matches.
-5. Close by explaining that incremental ingestion plus pipeline versioning prevents unnecessary rebuilds while still invalidating stale derived artifacts after parser changes.
+5. Run `evaluate_extraction.py` to show that the demo also checks extraction quality against expected results.
+6. Close by explaining that incremental ingestion plus pipeline versioning prevents unnecessary rebuilds while still invalidating stale derived artifacts after parser changes.
 
 ## Short interview script
 
@@ -70,4 +73,4 @@ You can use this framing almost verbatim:
 
 “The pipeline reads markdown docs, normalizes them into sections, extracts API metadata like method, endpoint, params, response fields, and status codes, and then writes searchable chunk artifacts. I also added incremental ingestion with content hashes and pipeline versioning so unchanged docs can be reused safely, while parser changes still invalidate stale derived output.”
 
-“For the retrieval side, I’m showing a simple keyword scorer, but the important point is the shape of the indexed data. The next natural step would be embedding-based ranking or richer schema extraction, but even this small demo already shows how ingestion quality drives downstream agent usefulness.”
+“For the retrieval side, I’m showing a simple keyword scorer, but the important point is the shape of the indexed data. I also added a tiny evaluation script so the pipeline can verify expected extraction quality on sample docs, instead of relying only on visual inspection. The next natural step would be embedding-based ranking or richer schema extraction, but even this small demo already shows how ingestion quality drives downstream agent usefulness.”

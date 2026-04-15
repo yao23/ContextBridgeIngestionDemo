@@ -10,6 +10,10 @@ echo "==> Showing extracted API schema"
 python3 schema_summary.py
 echo
 
+echo "==> Verifying extraction quality"
+python3 evaluate_extraction.py
+echo
+
 echo "==> Running sample search: create token"
 python3 search.py "create token"
 echo
