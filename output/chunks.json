@@ -7,10 +7,20 @@
     "section": "Create Token",
     "method": "POST",
     "endpoint": "/v1/token",
-    "content": "POST /v1/token\n\ncurl -X POST /v1/token",
+    "params": [
+      "client_id",
+      "client_secret"
+    ],
+    "examples": [
+      "curl -X POST /v1/token \\\n  -H \"Authorization: Bearer <admin-token>\" \\\n  -d \"client_id=demo-app\" \\\n  -d \"client_secret=super-secret\""
+    ],
+    "auth_required": true,
+    "content": "POST /v1/token\nRequires Bearer authentication.\n- client_id: OAuth client identifier\n- client_secret: OAuth client secret\n\ncurl -X POST /v1/token \\\n  -H \"Authorization: Bearer <admin-token>\" \\\n  -d \"client_id=demo-app\" \\\n  -d \"client_secret=super-secret\"",
     "tags": [
+      "auth",
       "token",
-      "post"
+      "post",
+      "bearer"
     ]
   },
   {
@@ -21,10 +31,21 @@
     "section": "Get User",
     "method": "GET",
     "endpoint": "/v1/users/{id}",
-    "content": "GET /v1/users/{id}\n\ncurl /v1/users/123",
+    "params": [
+      "id",
+      "expand"
+    ],
+    "examples": [
+      "curl /v1/users/123 \\\n  -H \"Authorization: Bearer <token>\""
+    ],
+    "auth_required": true,
+    "content": "GET /v1/users/{id}\nRequires Bearer authentication.\n- id: user identifier path parameter\n- expand: optional field expansion query parameter\n\ncurl /v1/users/123 \\\n  -H \"Authorization: Bearer <token>\"",
     "tags": [
+      "auth",
+      "token",
       "user",
-      "get"
+      "get",
+      "bearer"
     ]
   }
 ]

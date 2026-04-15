@@ -8,6 +8,7 @@ This project is a lightweight data-ingestion demo for API documentation. It read
 - Metadata attached to chunks for downstream coding-agent retrieval
 - Incremental ingestion using content hashes
 - Lightweight endpoint extraction for API sections
+- Parameter, example, and auth-hint extraction
 - A simple keyword search CLI over the generated chunks
 
 ## Project layout
@@ -18,14 +19,16 @@ This project is a lightweight data-ingestion demo for API documentation. It read
 - `chunker.py`: emits chunk records with basic tags
 - `indexer.py`: persists outputs and ingestion state
 - `search.py`: searches chunked output by keyword overlap
+- `schema_summary.py`: prints a compact API-schema view from normalized docs
 - `sample_docs/`: example API docs to ingest
 - `output/`: generated artifacts
 
 ## Run it
 
 ```bash
-python main.py
-python search.py "create token"
+python3 main.py
+python3 search.py "create token"
+python3 schema_summary.py
 ```
 
 ## Output files
@@ -35,6 +38,7 @@ python search.py "create token"
 - `output/chunks.json`: searchable chunk records
 - `output/state.json`: ingestion state used for incremental runs
 - Endpoint and HTTP method metadata are included when the parser can detect them
+- Path params, bullet-listed params, examples, and auth hints are extracted when present
 
 ## Incremental behavior
 
@@ -44,4 +48,4 @@ Each markdown file gets a SHA-256 content hash. On re-run, unchanged docs reuse 
 
 - Preserving section boundaries and examples improves retrieval quality for coding agents.
 - Stable document identities and content hashes let the pipeline avoid full rebuilds.
-- The next natural extension is richer schema extraction for params, auth rules, and examples.
+- The next natural extension is response-schema extraction and richer validation rules.

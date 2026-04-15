@@ -6,12 +6,20 @@
     "sections": [
       {
         "heading": "Create Token",
-        "text": "POST /v1/token",
+        "text": "POST /v1/token\nRequires Bearer authentication.\n- client_id: OAuth client identifier\n- client_secret: OAuth client secret",
         "code_blocks": [
-          "curl -X POST /v1/token"
+          "curl -X POST /v1/token \\\n  -H \"Authorization: Bearer <admin-token>\" \\\n  -d \"client_id=demo-app\" \\\n  -d \"client_secret=super-secret\""
         ],
         "method": "POST",
-        "endpoint": "/v1/token"
+        "endpoint": "/v1/token",
+        "params": [
+          "client_id",
+          "client_secret"
+        ],
+        "examples": [
+          "curl -X POST /v1/token \\\n  -H \"Authorization: Bearer <admin-token>\" \\\n  -d \"client_id=demo-app\" \\\n  -d \"client_secret=super-secret\""
+        ],
+        "auth_required": true
       }
     ]
   },
@@ -22,12 +30,20 @@
     "sections": [
       {
         "heading": "Get User",
-        "text": "GET /v1/users/{id}",
+        "text": "GET /v1/users/{id}\nRequires Bearer authentication.\n- id: user identifier path parameter\n- expand: optional field expansion query parameter",
         "code_blocks": [
-          "curl /v1/users/123"
+          "curl /v1/users/123 \\\n  -H \"Authorization: Bearer <token>\""
         ],
         "method": "GET",
-        "endpoint": "/v1/users/{id}"
+        "endpoint": "/v1/users/{id}",
+        "params": [
+          "id",
+          "expand"
+        ],
+        "examples": [
+          "curl /v1/users/123 \\\n  -H \"Authorization: Bearer <token>\""
+        ],
+        "auth_required": true
       }
     ]
   }

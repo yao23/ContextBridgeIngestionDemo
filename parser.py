@@ -11,6 +11,22 @@ def extract_endpoint_signature(text: str):
             return match.group(1), match.group(2)
     return "", ""
 
+def extract_path_params(endpoint: str):
+    return re.findall(r"\{([^}]+)\}", endpoint)
+
+def extract_bullet_params(text: str):
+    params = []
+    for line in text.splitlines():
+        match = re.match(r"^\s*-\s*`?([A-Za-z0-9_\-]+)`?\s*:", line.strip())
+        if match:
+            params.append(match.group(1))
+    return params
+
+def infer_auth_required(text: str, code_blocks: list[str]):
+    searchable = "\n".join([text] + code_blocks).lower()
+    auth_markers = ("bearer", "authorization", "api key", "requires auth", "requires authentication")
+    return any(marker in searchable for marker in auth_markers)
+
 def normalize_doc(raw_doc: RawDoc):
     lines = raw_doc.raw_text.splitlines()
     sections = []
@@ -26,7 +42,23 @@ def normalize_doc(raw_doc: RawDoc):
         text = "\n".join(text_lines).strip()
         if text or code_blocks:
             method, endpoint = extract_endpoint_signature(text)
-            sections.append(Section(current_heading, text, code_blocks[:], method, endpoint))
+            params = []
+            if endpoint:
+                params.extend(extract_path_params(endpoint))
+            params.extend(extract_bullet_params(text))
+            deduped_params = list(dict.fromkeys(params))
+            sections.append(
+                Section(
+                    current_heading,
+                    text,
+                    code_blocks[:],
+                    method,
+                    endpoint,
+                    deduped_params,
+                    code_blocks[:],
+                    infer_auth_required(text, code_blocks),
+                )
+            )
         buffer = []
         code_blocks = []
 

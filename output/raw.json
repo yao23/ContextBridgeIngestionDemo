@@ -2,13 +2,13 @@
   {
     "path": "sample_docs/auth.md",
     "title": "Auth API",
-    "raw_text": "# Auth API\n\n## Create Token\nPOST /v1/token\n\n```\ncurl -X POST /v1/token\n```\n",
-    "content_hash": "62b24018b5d2fb35716b214b83f4e449eee337ce5abf92cddc3190edd60c1cb7"
+    "raw_text": "# Auth API\n\n## Create Token\nPOST /v1/token\n\nRequires Bearer authentication.\n\n- client_id: OAuth client identifier\n- client_secret: OAuth client secret\n\n```\ncurl -X POST /v1/token \\\n  -H \"Authorization: Bearer <admin-token>\" \\\n  -d \"client_id=demo-app\" \\\n  -d \"client_secret=super-secret\"\n```\n",
+    "content_hash": "b9c418e8592bf3f3a4beaa2b696d0910cc04efad6d2ab66c0989c708e2be892f"
   },
   {
     "path": "sample_docs/users.md",
     "title": "Users API",
-    "raw_text": "# Users API\n\n## Get User\nGET /v1/users/{id}\n\n```\ncurl /v1/users/123\n```\n",
-    "content_hash": "ed53e71873000a773e8c4dd0f85fee7f63f886619e711b19015dacfb129423c0"
+    "raw_text": "# Users API\n\n## Get User\nGET /v1/users/{id}\n\nRequires Bearer authentication.\n\n- id: user identifier path parameter\n- expand: optional field expansion query parameter\n\n```\ncurl /v1/users/123 \\\n  -H \"Authorization: Bearer <token>\"\n```\n",
+    "content_hash": "a4419336c12d2f0a88542fe657580858180281ab7cda4d165ce0cb244bcb7a0f"
   }
 ]

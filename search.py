@@ -14,6 +14,7 @@ def score(q, record):
             record["section"],
             record.get("method", ""),
             record.get("endpoint", ""),
+            " ".join(record.get("params", [])),
             record["content"],
             " ".join(record["tags"]),
         ]
@@ -43,6 +44,10 @@ def main():
         print(f"[score={r['score']}] {r['title']} > {r['section']}")
         if r.get("method") and r.get("endpoint"):
             print(f"endpoint={r['method']} {r['endpoint']}")
+        if r.get("params"):
+            print(f"params={', '.join(r['params'])}")
+        if r.get("auth_required"):
+            print("auth=required")
         print(f"tags={', '.join(r['tags']) if r['tags'] else 'none'}")
         print(r["content"][:200])
         print("---")

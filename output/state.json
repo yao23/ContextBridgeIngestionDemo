@@ -3,14 +3,14 @@
     "doc_id": "auth",
     "path": "sample_docs/auth.md",
     "title": "Auth API",
-    "content_hash": "62b24018b5d2fb35716b214b83f4e449eee337ce5abf92cddc3190edd60c1cb7",
-    "pipeline_version": "2"
+    "content_hash": "b9c418e8592bf3f3a4beaa2b696d0910cc04efad6d2ab66c0989c708e2be892f",
+    "pipeline_version": "3"
   },
   {
     "doc_id": "users",
     "path": "sample_docs/users.md",
     "title": "Users API",
-    "content_hash": "ed53e71873000a773e8c4dd0f85fee7f63f886619e711b19015dacfb129423c0",
-    "pipeline_version": "2"
+    "content_hash": "a4419336c12d2f0a88542fe657580858180281ab7cda4d165ce0cb244bcb7a0f",
+    "pipeline_version": "3"
   }
 ]
