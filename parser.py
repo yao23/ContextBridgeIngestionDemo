@@ -16,11 +16,41 @@ def extract_path_params(endpoint: str):
 
 def extract_bullet_params(text: str):
     params = []
+    stop_headers = ("response fields:", "returns:", "response:", "status codes:")
     for line in text.splitlines():
-        match = re.match(r"^\s*-\s*`?([A-Za-z0-9_\-]+)`?\s*:", line.strip())
+        stripped = line.strip()
+        if stripped.lower() in stop_headers:
+            break
+        match = re.match(r"^\s*-\s*`?([A-Za-z0-9_\-]+)`?\s*:", stripped)
         if match:
             params.append(match.group(1))
     return params
+
+def extract_response_fields(text: str):
+    fields = []
+    in_response_fields = False
+    for line in text.splitlines():
+        stripped = line.strip()
+        lowered = stripped.lower()
+        if lowered in ("response fields:", "returns:", "response:"):
+            in_response_fields = True
+            continue
+        if in_response_fields:
+            match = re.match(r"^\s*-\s*`?([A-Za-z0-9_\-]+)`?\s*:", stripped)
+            if match:
+                fields.append(match.group(1))
+                continue
+            if stripped and not stripped.startswith("-"):
+                in_response_fields = False
+    return fields
+
+def extract_status_codes(text: str):
+    codes = []
+    for line in text.splitlines():
+        match = re.match(r"^\s*-\s*(\d{3})\b", line.strip())
+        if match:
+            codes.append(match.group(1))
+    return list(dict.fromkeys(codes))
 
 def infer_auth_required(text: str, code_blocks: list[str]):
     searchable = "\n".join([text] + code_blocks).lower()
@@ -47,6 +77,8 @@ def normalize_doc(raw_doc: RawDoc):
                 params.extend(extract_path_params(endpoint))
             params.extend(extract_bullet_params(text))
             deduped_params = list(dict.fromkeys(params))
+            response_fields = extract_response_fields(text)
+            status_codes = extract_status_codes(text)
             sections.append(
                 Section(
                     current_heading,
@@ -55,6 +87,8 @@ def normalize_doc(raw_doc: RawDoc):
                     method,
                     endpoint,
                     deduped_params,
+                    response_fields,
+                    status_codes,
                     code_blocks[:],
                     infer_auth_required(text, code_blocks),
                 )

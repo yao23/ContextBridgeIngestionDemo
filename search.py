@@ -15,6 +15,8 @@ def score(q, record):
             record.get("method", ""),
             record.get("endpoint", ""),
             " ".join(record.get("params", [])),
+            " ".join(record.get("response_fields", [])),
+            " ".join(record.get("status_codes", [])),
             record["content"],
             " ".join(record["tags"]),
         ]
@@ -46,6 +48,10 @@ def main():
             print(f"endpoint={r['method']} {r['endpoint']}")
         if r.get("params"):
             print(f"params={', '.join(r['params'])}")
+        if r.get("response_fields"):
+            print(f"response_fields={', '.join(r['response_fields'])}")
+        if r.get("status_codes"):
+            print(f"status_codes={', '.join(r['status_codes'])}")
         if r.get("auth_required"):
             print("auth=required")
         print(f"tags={', '.join(r['tags']) if r['tags'] else 'none'}")

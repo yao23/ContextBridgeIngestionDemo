@@ -11,16 +11,25 @@
       "client_id",
       "client_secret"
     ],
+    "response_fields": [
+      "access_token",
+      "expires_in"
+    ],
+    "status_codes": [
+      "200",
+      "401"
+    ],
     "examples": [
       "curl -X POST /v1/token \\\n  -H \"Authorization: Bearer <admin-token>\" \\\n  -d \"client_id=demo-app\" \\\n  -d \"client_secret=super-secret\""
     ],
     "auth_required": true,
-    "content": "POST /v1/token\nRequires Bearer authentication.\n- client_id: OAuth client identifier\n- client_secret: OAuth client secret\n\ncurl -X POST /v1/token \\\n  -H \"Authorization: Bearer <admin-token>\" \\\n  -d \"client_id=demo-app\" \\\n  -d \"client_secret=super-secret\"",
+    "content": "POST /v1/token\nRequires Bearer authentication.\n- client_id: OAuth client identifier\n- client_secret: OAuth client secret\nResponse fields:\n- access_token: issued bearer token\n- expires_in: token lifetime in seconds\nStatus codes:\n- 200: token created\n- 401: invalid admin token\n\ncurl -X POST /v1/token \\\n  -H \"Authorization: Bearer <admin-token>\" \\\n  -d \"client_id=demo-app\" \\\n  -d \"client_secret=super-secret\"",
     "tags": [
       "auth",
       "token",
       "post",
-      "bearer"
+      "bearer",
+      "response"
     ]
   },
   {
@@ -35,17 +44,27 @@
       "id",
       "expand"
     ],
+    "response_fields": [
+      "id",
+      "email",
+      "profile"
+    ],
+    "status_codes": [
+      "200",
+      "404"
+    ],
     "examples": [
       "curl /v1/users/123 \\\n  -H \"Authorization: Bearer <token>\""
     ],
     "auth_required": true,
-    "content": "GET /v1/users/{id}\nRequires Bearer authentication.\n- id: user identifier path parameter\n- expand: optional field expansion query parameter\n\ncurl /v1/users/123 \\\n  -H \"Authorization: Bearer <token>\"",
+    "content": "GET /v1/users/{id}\nRequires Bearer authentication.\n- id: user identifier path parameter\n- expand: optional field expansion query parameter\nResponse fields:\n- id: user id\n- email: primary email address\n- profile: expanded profile object\nStatus codes:\n- 200: user returned\n- 404: user not found\n\ncurl /v1/users/123 \\\n  -H \"Authorization: Bearer <token>\"",
     "tags": [
       "auth",
       "token",
       "user",
       "get",
-      "bearer"
+      "bearer",
+      "response"
     ]
   }
 ]

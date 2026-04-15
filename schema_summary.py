@@ -14,6 +14,10 @@ def main():
             print(summary)
             if section.get("params"):
                 print(f"  params: {', '.join(section['params'])}")
+            if section.get("response_fields"):
+                print(f"  response fields: {', '.join(section['response_fields'])}")
+            if section.get("status_codes"):
+                print(f"  status codes: {', '.join(section['status_codes'])}")
             if section.get("auth_required"):
                 print("  auth: required")
             if section.get("examples"):

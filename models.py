@@ -16,6 +16,8 @@ class Section:
     method: str = ""
     endpoint: str = ""
     params: List[str] = field(default_factory=list)
+    response_fields: List[str] = field(default_factory=list)
+    status_codes: List[str] = field(default_factory=list)
     examples: List[str] = field(default_factory=list)
     auth_required: bool = False
 
@@ -36,6 +38,8 @@ class Chunk:
     method: str
     endpoint: str
     params: List[str]
+    response_fields: List[str]
+    status_codes: List[str]
     examples: List[str]
     auth_required: bool
     content: str

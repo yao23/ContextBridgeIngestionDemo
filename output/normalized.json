@@ -6,7 +6,7 @@
     "sections": [
       {
         "heading": "Create Token",
-        "text": "POST /v1/token\nRequires Bearer authentication.\n- client_id: OAuth client identifier\n- client_secret: OAuth client secret",
+        "text": "POST /v1/token\nRequires Bearer authentication.\n- client_id: OAuth client identifier\n- client_secret: OAuth client secret\nResponse fields:\n- access_token: issued bearer token\n- expires_in: token lifetime in seconds\nStatus codes:\n- 200: token created\n- 401: invalid admin token",
         "code_blocks": [
           "curl -X POST /v1/token \\\n  -H \"Authorization: Bearer <admin-token>\" \\\n  -d \"client_id=demo-app\" \\\n  -d \"client_secret=super-secret\""
         ],
@@ -15,6 +15,14 @@
         "params": [
           "client_id",
           "client_secret"
+        ],
+        "response_fields": [
+          "access_token",
+          "expires_in"
+        ],
+        "status_codes": [
+          "200",
+          "401"
         ],
         "examples": [
           "curl -X POST /v1/token \\\n  -H \"Authorization: Bearer <admin-token>\" \\\n  -d \"client_id=demo-app\" \\\n  -d \"client_secret=super-secret\""
@@ -30,7 +38,7 @@
     "sections": [
       {
         "heading": "Get User",
-        "text": "GET /v1/users/{id}\nRequires Bearer authentication.\n- id: user identifier path parameter\n- expand: optional field expansion query parameter",
+        "text": "GET /v1/users/{id}\nRequires Bearer authentication.\n- id: user identifier path parameter\n- expand: optional field expansion query parameter\nResponse fields:\n- id: user id\n- email: primary email address\n- profile: expanded profile object\nStatus codes:\n- 200: user returned\n- 404: user not found",
         "code_blocks": [
           "curl /v1/users/123 \\\n  -H \"Authorization: Bearer <token>\""
         ],
@@ -39,6 +47,15 @@
         "params": [
           "id",
           "expand"
+        ],
+        "response_fields": [
+          "id",
+          "email",
+          "profile"
+        ],
+        "status_codes": [
+          "200",
+          "404"
         ],
         "examples": [
           "curl /v1/users/123 \\\n  -H \"Authorization: Bearer <token>\""

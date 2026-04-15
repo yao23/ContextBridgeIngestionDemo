@@ -1,7 +1,7 @@
 from models import NormalizedDoc, Chunk
 
 def infer_tags(text: str, method: str = "", endpoint: str = ""):
-    keywords = ["auth","token","user","payment","post","get","bearer"]
+    keywords = ["auth","token","user","payment","post","get","bearer","response"]
     searchable = " ".join([text, method, endpoint]).lower()
     return [k for k in keywords if k in searchable]
 
@@ -18,6 +18,8 @@ def chunk_doc(doc: NormalizedDoc):
             sec.method,
             sec.endpoint,
             sec.params,
+            sec.response_fields,
+            sec.status_codes,
             sec.examples,
             sec.auth_required,
             content.strip(),

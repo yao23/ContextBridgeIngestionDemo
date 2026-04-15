@@ -9,6 +9,7 @@ This project is a lightweight data-ingestion demo for API documentation. It read
 - Incremental ingestion using content hashes
 - Lightweight endpoint extraction for API sections
 - Parameter, example, and auth-hint extraction
+- Response-field and status-code extraction
 - A simple keyword search CLI over the generated chunks
 
 ## Project layout
@@ -39,6 +40,7 @@ python3 schema_summary.py
 - `output/state.json`: ingestion state used for incremental runs
 - Endpoint and HTTP method metadata are included when the parser can detect them
 - Path params, bullet-listed params, examples, and auth hints are extracted when present
+- Response fields and status codes are extracted from simple markdown patterns
 
 ## Incremental behavior
 
@@ -48,4 +50,4 @@ Each markdown file gets a SHA-256 content hash. On re-run, unchanged docs reuse 
 
 - Preserving section boundaries and examples improves retrieval quality for coding agents.
 - Stable document identities and content hashes let the pipeline avoid full rebuilds.
-- The next natural extension is response-schema extraction and richer validation rules.
+- The next natural extension is nested JSON-schema extraction and richer validation rules.

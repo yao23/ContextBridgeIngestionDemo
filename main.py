@@ -4,7 +4,7 @@ from chunker import chunk_doc
 from indexer import load_existing_chunks, load_state, persist, persist_state
 from models import IngestionState
 
-PIPELINE_VERSION = "3"
+PIPELINE_VERSION = "5"
 
 def main():
     raw = load_markdown_docs("sample_docs")
